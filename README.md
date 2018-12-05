@@ -58,30 +58,6 @@ opennode.createCharge({
 });
 ```
 
-### Configuring Timeout
-
-Request timeout is configurable (the default is Node's default of 120 seconds):
-
-``` js
-stripe.setTimeout(20000); // in ms (this is 20 seconds)
-```
-
-### Configuring For Connect
-
-A per-request `Stripe-Account` header for use with [Stripe Connect][connect]
-can be added to any method:
-
-``` js
-// Retrieve the balance for a connected account:
-stripe.balance.retrieve({
-  stripe_account: 'acct_foo'
-}).then((balance) => {
-  // The balance object for the connected account
-}).catch((err) => {
-  // Error
-});
-```
-
 ### Webhook signing
 
 OpenNode can send signed webhook events that notify your aplication any time a specific event occurs. You can read more about it [here](https://opennode.co/docs).
