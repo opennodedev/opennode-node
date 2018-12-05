@@ -1,0 +1,33 @@
+{
+  "name": "opennode",
+  "description": "Node.js library for the OpenNode API.",
+  "homepage": "https://opennode.co/docs",
+  "bugs": "https://github.com/opennodedev/opennode-node/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/opennodedev/opennode-node"
+  },
+  "author": {
+    "name": "OpenNode Inc",
+    "email": "support@opennode.co",
+    "url": "https://opennode.co"
+  },
+  "contributors": [
+    "João Almeida <joao@opennode.co>"
+  ],
+  "license": "MIT",
+  "keywords": [
+   "bitcoin",
+   "lightning network",
+   "micotransactions",
+   "payment processing",
+   "payment gateway",
+   "api",
+   "opennode"
+  ],
+  "main": "src/lib.js",
+  "version": "1.0.0",
+  "dependencies": {
+    "axios": "^0.18.0"
+  }
+}
