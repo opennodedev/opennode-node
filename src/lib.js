@@ -72,7 +72,7 @@ async function listWithdrawals() {
   try {
 
     const response = await instance.get(`/withdrawals`);
-    return JSON.parse(response.data);
+    return response.data.data;
 
   } catch (error) {
     throw Exception(error.response.status, error.response.statusText, error.response.data.message);
@@ -93,7 +93,7 @@ async function listRates() {
 async function listCurrencies() {
   try {
 
-    const response = await axios.get(`/currencies`);
+    const response = await instance.get(`/currencies`);
     return response.data.data;
 
   } catch (error) {
