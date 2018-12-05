@@ -1,6 +1,6 @@
 # OpenNode Node.js Library
 
-[![Version](https://img.shields.io/npm/v/stripe.svg)](https://www.npmjs.org/package/opennode)
+[![Version](https://img.shields.io/npm/v/opennode.svg)](https://www.npmjs.org/package/opennode)
 
 The OpenNode Node library provides convenient access to the OpenNode API from
 applications written in server-side JavaScript.
