@@ -1,13 +1,15 @@
 const axios = require('axios');
-const version = 'npm-opennode-v1.0.0'
+const version = 'npm-opennode-v1.0.3'
 var instance = undefined;
+var api_key;
 
 
-function setCredentials(api_key = '', environment = 'live') {
+function setCredentials(key = '', environment = 'live') {
   if (instance != undefined) return;
 
+  api_key = key;
   instance = axios.create();
-  instance.defaults.baseURL = (api_key === 'live') ? 'https://api.opennode.co/v1' : 'https://dev-api.opennode.co/v1';
+  instance.defaults.baseURL = (environment === 'live') ? 'https://api.opennode.co/v1' : 'https://dev-api.opennode.co/v1';
   instance.defaults.timeout = 15000;
   instance.defaults.headers = { 'Authorization' : api_key, 'user_agent' : version };
 }
