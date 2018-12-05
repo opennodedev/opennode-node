@@ -34,7 +34,7 @@ try {
   });
 }
 catch (error) {
-  console.error(`${error.message}`);
+  console.error(`${error.status} | ${error.message}`);
 }
 ```
 
@@ -54,7 +54,7 @@ opennode.createCharge({
   console.log(charge);
 })
 .catch(error => {
-  console.error(error.message);
+  console.error(`${error.status} | ${error.message}`);
 });
 ```
 
