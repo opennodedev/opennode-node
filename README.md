@@ -1,6 +1,8 @@
 # OpenNode Node.js Library
 
 [![Version](https://img.shields.io/npm/v/opennode.svg)](https://www.npmjs.org/package/opennode)
+[![Build Status](https://travis-ci.org/opennodedev/opennode-node.svg?branch=master)](https://travis-ci.org/opennodedev/opennode-node)
+[![Try opennode on RunKit](https://badge.runkitcdn.com/opennode.svg)](https://npm.runkit.com/opennode)
 
 The OpenNode Node library provides convenient access to the OpenNode API from
 applications written in server-side JavaScript.
