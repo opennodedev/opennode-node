@@ -9,7 +9,7 @@ applications written in server-side JavaScript.
 
 ## Documentation
 
-See the [API docs](https://opennode.co/docs).
+You can find examples [here](examples/example.js). For more information refer to our [API docs](https://opennode.co/docs).
 
 ## Installation
 
@@ -62,7 +62,7 @@ opennode.createCharge({
 
 ### Webhook signing
 
-OpenNode can send signed webhook events that notify your aplication any time a specific event occurs. You can read more about it [here](https://opennode.co/docs).
+OpenNode can send signed webhook events that notify your aplication any time a specific event occurs. You can read more about it [here](https://docs.opennode.co/).
 
 You can verify if a webhook was sent by OpenNode by comparing the signatures.
 

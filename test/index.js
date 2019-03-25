@@ -11,7 +11,7 @@ describe('charge', function() {
       try {
         charge = await opennode.chargeInfo('47bb5224-bf50-49d0-a317-4adfd345221a');
       } catch (error) {
-        err = error
+        err = error;
       }
       finally {
         expect(err).to.be.an('undefined');
@@ -34,7 +34,7 @@ describe('charge', function() {
           auto_settle: false
         });
       } catch (error) {
-        err = error
+        err = error;
       }
       finally {
         expect(err).to.be.an('undefined');
@@ -53,7 +53,7 @@ describe('charge', function() {
           "description": "hello world"
         });
       } catch (error) {
-        err = error
+        err = error;
       }
       finally {
         assert.deepEqual(err.status, 400);
@@ -71,13 +71,12 @@ describe('utils', function() {
       try {
         currencies = await opennode.listCurrencies();
       } catch (error) {
-        err = error
+        err = error;
       }
       finally {
         expect(err).to.be.an('undefined');
         expect(currencies).to.an('array');
       }
-
     });
   });
 
@@ -89,7 +88,7 @@ describe('utils', function() {
       try {
         rates = await opennode.listRates();
       } catch (error) {
-        err = error
+        err = error;
       }
       finally {
         expect(err).to.be.an('undefined');
@@ -108,7 +107,7 @@ describe('withdrawals', function() {
       try {
         rates = await opennode.withdrawalInfo('73488531-d391-4de5-9468-0f72df85220c');
       } catch (error) {
-        err = error
+        err = error;
       }
       finally {
         expect(err).to.be.an('undefined');
@@ -132,6 +131,25 @@ describe('withdrawals', function() {
       }
       finally {
         assert.deepEqual(err.status, 401);
+      }
+    });
+  });
+});
+
+describe('account', function() {
+  describe('get user balance', function() {
+    it('should return a balance object', async () => {
+
+      let balance, err;
+
+      try {
+        balance = await opennode.getBalance();
+      } catch (error) {
+        err = error;
+      }
+      finally {
+        expect(err).to.be.an('undefined');
+        expect(balance).to.an('object');
       }
     });
   });
