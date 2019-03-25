@@ -1,5 +1,5 @@
 const axios = require('axios');
-const version = 'npm-opennode-v1.1';
+const version = 'npm-opennode-v1.1.0';
 var instance = undefined;
 var api_key;
 var env;
