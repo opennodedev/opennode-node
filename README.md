@@ -16,11 +16,13 @@ You can find examples [here](examples/example.js). For more information refer to
 Install the package with:
 
     npm install opennode --save
+    or
+    yarn add opennode
 
 ## Usage
 
 The package needs to be configured with your account's secret key which is
-available in your [OpenNode Dashboard](https://opennode.co/settings/api).
+available in your [OpenNode Dashboard](https://app.opennode.co/settings/api).
 value:
 
 ``` js
@@ -62,7 +64,7 @@ opennode.createCharge({
 
 ### Webhook signing
 
-OpenNode can send signed webhook events that notify your aplication any time a specific event occurs. You can read more about it [here](https://docs.opennode.co/).
+OpenNode can send signed webhook events that notify your application any time a specific event occurs. You can read more about it [here](https://developers.opennode.co/).
 
 You can verify if a webhook was sent by OpenNode by comparing the signatures.
 
