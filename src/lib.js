@@ -1,4 +1,5 @@
 const axios = require('axios');
+const crypto = require('crypto');
 const version = 'npm-opennode-v1.1.0';
 var instance = undefined;
 var api_key;

@@ -136,6 +136,29 @@ describe('withdrawals', function() {
   });
 });
 
+describe('webhook', function() {
+  describe('verify webhook signature', function() {
+    it('signatures should match', async () => {
+
+      let result, err;
+      const charge = {
+        id: '22b13c2f-3297-422d-9e7c-4f9a35651d38',
+        hashed_order: 'ec3978d14a2d547a174fd4980f562f1f4a12953f069d60844f99088c7cd77f1b'
+      };
+
+      try {
+        result = await opennode.signatureIsValid(charge);
+      } catch (error) {
+        err = error;
+      }
+      finally {
+        expect(result).to.be.true;
+        expect(err).to.be.an('undefined');
+      }
+    });
+  });
+});
+
 describe('account', function() {
   describe('get user balance', function() {
     it('should return a balance object', async () => {
