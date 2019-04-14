@@ -1,9 +1,9 @@
 const axios = require("axios");
 const crypto = require("crypto");
 const version = "npm-opennode-v1.1.0";
-var instance = undefined;
-var api_key;
-var env;
+let instance = undefined;
+let api_key;
+let env;
 
 function setCredentials(key = "", environment = "live") {
   if (instance != undefined) return;
