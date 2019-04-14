@@ -6,7 +6,7 @@ let api_key;
 let env;
 
 function setCredentials(key = "", environment = "live") {
-  if (instance != undefined) return;
+  if (instance !== undefined) return;
 
   api_key = key;
   instance = axios.create();
