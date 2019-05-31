@@ -1,6 +1,6 @@
 const axios = require('axios');
 const crypto = require('crypto');
-const version = 'npm-opennode-v1.1.0';
+const version = 'npm-opennode-v1.2.0';
 var instance = undefined;
 var api_key;
 var env;
@@ -135,6 +135,36 @@ async function verifySignature(charge) {
   return hash === charge.hashed_order;
 }
 
+async function refundCharge(refund) {
+  try {
+    const response = await instance.post(`/refunds`, refund);
+    return response.data.data;
+  }
+  catch (error) {
+    throw Exception(error.response.status, error.response.statusText, error.response.data.message);
+  }
+}
+
+async function listRefunds() {
+  try {
+    const response = await instance.get(`/refunds`);
+    return response.data.data;
+  }
+  catch (error) {
+    throw Exception(error.response.status, error.response.statusText, error.response.data.message);    
+  }
+}
+
+async function refundInfo(id) {
+  try {
+    const response = await instance.get(`/refund/${id}`);
+    return response.data.data;
+  }
+  catch (error) {
+    throw Exception(error.response.status, error.response.statusText, error.response.data.message);        
+  }
+}
+
 function Exception(statusCode, statusText, message) {
   var error = new Error(message);
   error.name = statusText;
@@ -157,5 +187,8 @@ module.exports = {
   listCurrencies: listCurrencies,
   signatureIsValid: verifySignature,
   getBalance: userBalance,
+  refundCharge: refundCharge,
+  listRefunds: listRefunds,
+  refundInfo: refundInfo
 };
 
