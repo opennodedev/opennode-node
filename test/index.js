@@ -122,7 +122,7 @@ describe('withdrawals', function() {
       let withdrawal, err;
 
       try {
-        withdrawal = await opennode.initiateWithdrawal({
+        withdrawal = await opennode.initiateWithdrawalAsync({
           amount: 100000,
           type: "chain"
         });
@@ -173,6 +173,62 @@ describe('account', function() {
       finally {
         expect(err).to.be.an('undefined');
         expect(balance).to.an('object');
+      }
+    });
+  });
+});
+
+describe('refunds', function() {
+  describe('refund charge', function() {
+    it('should return a refund object', async () => {
+
+      let refund, err;
+      
+      try {
+        refund = await opennode.refundCharge({
+          checkout_id: '5af57c22-9855-41ae-a161-65ba625d7613',
+          address: 'tb1quvqmj4kzu4v9308wg300ysv5yl7ta80a8yrdn7'
+        });
+      } catch (error) {
+        err = error;
+      }
+      finally {
+        expect(err).to.be.an('undefined');
+        expect(refund).to.an('object');
+      }
+    });
+  });
+
+  describe('refund info', function() {
+    it('should return a refund object', async () => {
+
+      let refund, err;
+
+      try {
+        refund = await opennode.refundInfo('6b57c77e-eab4-4b39-8146-121f1d0fe8ba');
+      } catch (error) {
+        err = error;
+      }
+      finally {
+        expect(err).to.be.an('undefined');
+        expect(refund).to.an('object');
+      }
+    });
+  });
+
+  describe('list refunds', function() {
+    it('should return a list of refunds', async () => {
+
+      let refunds, err;
+
+      try {
+        refunds = await opennode.listRefunds();
+      } catch (error) {
+        err = error;
+      }
+      finally {
+        expect(err).to.be.an('undefined');
+        expect(refunds).to.an('array');
       }
     });
   });
