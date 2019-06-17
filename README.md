@@ -72,7 +72,7 @@ You can verify if a webhook was sent by OpenNode by comparing the signatures.
 
 function handleWebhook (req, res) {
   const charge = req.body;
-  const isValid = opennode.signatureIsValid(charge);
+  const isValid = await opennode.signatureIsValid(charge);
 
   if (isValid){
     //Handle event
