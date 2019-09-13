@@ -183,7 +183,7 @@ describe('refunds', function() {
     it('should return a refund object', async () => {
 
       let refund, err;
-      
+
       try {
         refund = await opennode.refundCharge({
           checkout_id: '5af57c22-9855-41ae-a161-65ba625d7613',
@@ -193,7 +193,7 @@ describe('refunds', function() {
         err = error;
       }
       finally {
-        expect(err).to.be.an('undefined');
+        assert.deepEqual(err.status, 404);
         expect(refund).to.an('object');
       }
     });
@@ -210,7 +210,7 @@ describe('refunds', function() {
         err = error;
       }
       finally {
-        expect(err).to.be.an('undefined');
+        assert.deepEqual(err.status, 404);
         expect(refund).to.an('object');
       }
     });
