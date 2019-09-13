@@ -7,12 +7,12 @@ var env;
 
 
 function setCredentials(key = '', environment = 'live') {
-  if (instance != undefined) return;
+  if (instance !== undefined) return;
 
   api_key = key;
   instance = axios.create();
   env = environment;
-  instance.defaults.baseURL = (environment === 'live') ? 'https://api.opennode.co/v1' : 'https://dev-api.opennode.co/v1';
+  instance.defaults.baseURL = (environment === 'live') ? 'https://api.opennode.com/v1' : 'https://dev-api.opennode.com/v1';
   instance.defaults.timeout = 15000;
   instance.defaults.headers = { 'Authorization' : api_key, 'user_agent' : version };
 }
@@ -118,7 +118,7 @@ async function userBalance() {
 async function initiateWithdrawalAsync(withdrawal) {
   try {
     let new_instance = axios.create();
-    new_instance.defaults.baseURL = (env === 'live') ? 'https://api.opennode.co/v2' : 'https://dev-api.opennode.co/v2';
+    new_instance.defaults.baseURL = (env === 'live') ? 'https://api.opennode.com/v2' : 'https://dev-api.opennode.com/v2';
     new_instance.defaults.timeout = 15000;
     new_instance.defaults.headers = { 'Authorization' : api_key, 'user_agent' : version };
 
@@ -151,7 +151,7 @@ async function listRefunds() {
     return response.data.data;
   }
   catch (error) {
-    throw Exception(error.response.status, error.response.statusText, error.response.data.message);    
+    throw Exception(error.response.status, error.response.statusText, error.response.data.message);
   }
 }
 
@@ -161,7 +161,7 @@ async function refundInfo(id) {
     return response.data.data;
   }
   catch (error) {
-    throw Exception(error.response.status, error.response.statusText, error.response.data.message);        
+    throw Exception(error.response.status, error.response.statusText, error.response.data.message);
   }
 }
 
