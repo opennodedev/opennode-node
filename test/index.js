@@ -193,8 +193,8 @@ describe('refunds', function() {
         err = error;
       }
       finally {
-        assert.deepEqual(err.status, 404);
-        expect(refund).to.an('object');
+        assert.deepEqual(err.status, 400);
+        expect(refund).to.be.an('undefined');
       }
     });
   });
@@ -210,8 +210,8 @@ describe('refunds', function() {
         err = error;
       }
       finally {
-        assert.deepEqual(err.status, 404);
-        expect(refund).to.an('object');
+        assert.deepEqual(err.status, 400);
+        expect(refund).to.be.an('undefined');
       }
     });
   });
