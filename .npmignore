@@ -23,3 +23,5 @@ CHANGELOG.md
 .eslintrc
 .babelrc
 .gitignore
+.editorconf
+.DS_Store
