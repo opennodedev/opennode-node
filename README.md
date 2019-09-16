@@ -2,6 +2,7 @@
 
 [![Version](https://img.shields.io/npm/v/opennode.svg)](https://www.npmjs.org/package/opennode)
 [![Build Status](https://travis-ci.org/opennodedev/opennode-node.svg?branch=master)](https://travis-ci.org/opennodedev/opennode-node)
+[![](https://badgen.net/npm/dt/opennode)](https://www.npmjs.com/package/opennode)
 [![Try opennode on RunKit](https://badge.runkitcdn.com/opennode.svg)](https://npm.runkit.com/opennode)
 
 The OpenNode Node library provides convenient access to the OpenNode API from
