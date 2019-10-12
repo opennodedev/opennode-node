@@ -21,7 +21,6 @@ async function listCharges() {
 }
 
 async function initiateWithdrawal(withdrawal) {
-  console.warn(`This method is deprecated and not recommend for use. Please use the asynchronous version (initiateWithdrawalAsync)`);
   return await instance.initiateWithdrawal(withdrawal);
 }
 
