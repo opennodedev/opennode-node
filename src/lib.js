@@ -1,5 +1,3 @@
-const axios = require('axios');
-const crypto = require('crypto');
 const OpenNodeClient = require('../submodules/client')
 var instance = undefined;
 

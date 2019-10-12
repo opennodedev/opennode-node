@@ -1,9 +1,6 @@
 const axios = require('axios');
 const crypto = require('crypto');
 const version = 'npm-opennode-v1.2.0';
-var instance = undefined;
-var api_key;
-var env;
 
 
 class OpenNodeClient {
