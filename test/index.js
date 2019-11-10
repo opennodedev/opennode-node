@@ -1,5 +1,6 @@
 const { assert, expect } = require('chai');
 const opennode = require('../src/lib');
+const client = require('../submodules/client');
 opennode.setCredentials('1f758b02-3405-45cf-8d71-f4462282a7ca', 'dev');
 
 describe('charge', function() {
@@ -231,5 +232,28 @@ describe('refunds', function() {
         expect(refunds).to.an('array');
       }
     });
+  });
+});
+
+describe('client', function () {
+  it('should allow multiple clients with different credentials', async () => {
+
+    let charge1, charge2, err
+    const client1 = new client('1f758b02-3405-45cf-8d71-f4462282a7ca', 'dev');
+    const charge1Id = '47bb5224-bf50-49d0-a317-4adfd345221a';
+    const client2 = new client('195d82c3-96de-43a3-9de2-13fc7fca7c7c', 'dev');
+    const charge2Id = 'd09fc8f0-8d51-4292-adeb-f8dd951fb7e6';
+
+    try {
+      charge1 = await client1.chargeInfo(charge1Id);
+      charge2 = await client2.chargeInfo(charge2Id);
+    } catch (error) {
+      err = error;
+    }
+    finally {
+      expect(err).to.be.an('undefined');
+      assert.deepEqual(charge1.id, charge1Id);
+      assert.deepEqual(charge2.id, charge2Id);
+    }
   });
 });
