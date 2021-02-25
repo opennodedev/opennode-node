@@ -160,6 +160,26 @@ class OpenNodeClient {
       throw Exception(error.response.status, error.response.statusText, error.response.data.message);
     }
   }
+
+  async initiatePayout(payout) {
+    try {
+      const response = await this.instance.post(`/payouts`, payout);
+      return response.data.data;
+    }
+    catch (error) {
+      throw Exception(error.response.status, error.response.statusText, error.response.data.message);
+    }
+  }
+
+  async payoutInfo(id) {
+    try {
+      const response = await this.instance.get(`/payout/${id}`);
+      return response.data.data;
+    }
+    catch (error) {
+      throw Exception(error.response.status, error.response.statusText, error.response.data.message);
+    }
+  }
 }
 
 function Exception(statusCode, statusText, message) {

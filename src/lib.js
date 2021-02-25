@@ -64,6 +64,14 @@ async function refundInfo(id) {
   return await instance.refundInfo(id);
 }
 
+async function initiatePayout(payout) {
+  return await instance.initiatePayout(payout);
+}
+
+async function payoutInfo(id) {
+  return await instance.payoutInfo(id);
+}
+
 module.exports = {
   setCredentials: setCredentials,
   createCharge: createCharge,
@@ -79,6 +87,8 @@ module.exports = {
   getBalance: userBalance,
   refundCharge: refundCharge,
   listRefunds: listRefunds,
-  refundInfo: refundInfo
+  refundInfo: refundInfo,
+  initiatePayout: initiatePayout,
+  payoutInfo: payoutInfo
 };
 
