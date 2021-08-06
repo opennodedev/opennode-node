@@ -160,6 +160,20 @@ class OpenNodeClient {
       throw Exception(error.response.status, error.response.statusText, error.response.data.message);
     }
   }
+
+  async createLnUrlWithdrawal(withdrawal) {
+    try {
+      let new_instance = axios.create();
+      new_instance.defaults.baseURL = (this.env === 'live') ? 'https://api.opennode.com/v2' : 'https://dev-api.opennode.com/v2';
+      new_instance.defaults.timeout = 15000;
+      new_instance.defaults.headers = { 'Authorization': this.api_key, 'user_agent': version };
+      const response = await this.new_instance.get(`/lnurl-withdrawal/${id}`);
+      return response.data.data;
+    }
+    catch (error) {
+      throw Exception(error.response.status, error.response.statusText, error.response.data.message);
+    }
+  }
 }
 
 function Exception(statusCode, statusText, message) {
