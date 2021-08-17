@@ -1,7 +1,7 @@
 {
   "name": "opennode",
   "description": "Node.js library for the OpenNode API.",
-  "homepage": "https://opennode.co/docs",
+  "homepage": "https://developers.opennode.com/",
   "bugs": "https://github.com/opennodedev/opennode-node/issues",
   "repository": {
     "type": "git",
