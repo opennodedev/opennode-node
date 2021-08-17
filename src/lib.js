@@ -64,6 +64,10 @@ async function refundInfo(id) {
   return await instance.refundInfo(id);
 }
 
+async function createLnUrlWithdrawal(withdrawal) {
+  return await instance.createLnUrlWithdrawal(withdrawal);
+}
+
 module.exports = {
   setCredentials: setCredentials,
   createCharge: createCharge,
@@ -79,6 +83,7 @@ module.exports = {
   getBalance: userBalance,
   refundCharge: refundCharge,
   listRefunds: listRefunds,
-  refundInfo: refundInfo
+  refundInfo: refundInfo,
+  createLnUrlWithdrawal: createLnUrlWithdrawal,
 };
 
