@@ -126,7 +126,7 @@ class OpenNodeClient {
     }
   }
 
-  async verifySignature(charge) {
+  verifySignature(charge) {
     const hash = crypto.createHmac('sha256', this.api_key).update(charge.id).digest('hex');
     return hash === charge.hashed_order;
   }

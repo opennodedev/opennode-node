@@ -48,8 +48,8 @@ async function initiateWithdrawalAsync(withdrawal) {
   return await instance.initiateWithdrawalAsync(withdrawal);
 }
 
-async function verifySignature(charge) {
-  return await instance.verifySignature(charge);
+function verifySignature(charge) {
+  return instance.verifySignature(charge);
 }
 
 async function refundCharge(refund) {
