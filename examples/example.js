@@ -44,9 +44,6 @@ opennode.chargeInfo('47bb5224-bf50-49d0-a317-4adfd345221a')
  * Creating a charge
  */
 
-/**
- * Using promises
- */
 
 const charge = {
   amount: 10.5,
@@ -80,5 +77,48 @@ opennode.createCharge(charge)
     console.error(`${error.status} | ${error.message}`);
   }
 })();
+
+/**
+ *
+ * Generate a LNURL-Withdrawal
+ */
+
+/**
+ * Using promises
+ */
+
+ const withdrawal = {
+  min_amt: 5000,
+  max_amt: 5000,
+  description: "Claim these 5000 sats",
+  external_id: "my-external-uuid",
+  callback_url: "https://example.com/webhook/opennode",
+};
+
+
+opennode.createLnUrlWithdrawal(withdrawal)
+  .then(response => {
+    console.log(response);
+  })
+  .catch(error => {
+    console.error(`${error.status} | ${error.message}`);
+  });
+
+/**
+ * Using async/await
+ */
+
+;(async () => {
+  try {
+    const response = await opennode.createLnUrlWithdrawal(withdrawal);
+    console.log(response);
+  }
+  catch(error) {
+    console.error(`${error.status} | ${error.message}`);
+  }
+})();
+
+
+
 
 
