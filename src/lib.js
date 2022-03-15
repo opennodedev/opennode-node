@@ -95,4 +95,3 @@ module.exports = {
   payoutInfo: payoutInfo,
   createLnUrlWithdrawal: createLnUrlWithdrawal,
 };
-
