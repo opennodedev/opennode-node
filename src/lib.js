@@ -70,6 +70,7 @@ async function initiatePayout(payout) {
 
 async function payoutInfo(id) {
   return await instance.payoutInfo(id);
+}
 
 async function createLnUrlWithdrawal(withdrawal) {
   return await instance.createLnUrlWithdrawal(withdrawal);
@@ -95,4 +96,3 @@ module.exports = {
   payoutInfo: payoutInfo,
   createLnUrlWithdrawal: createLnUrlWithdrawal,
 };
-
