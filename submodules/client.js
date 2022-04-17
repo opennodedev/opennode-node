@@ -7,10 +7,14 @@ class OpenNodeClient {
   constructor(key = '', environment = 'live') {
     this.api_key = key;
     this.instance = axios.create();
+    this.instance_v2 = axios.create();
     this.env = environment;
     this.instance.defaults.baseURL = (environment === 'live') ? 'https://api.opennode.com/v1' : 'https://dev-api.opennode.com/v1';
     this.instance.defaults.timeout = 15000;
     this.instance.defaults.headers = { 'Authorization': this.api_key, 'user_agent': version };
+    this.instance_v2.defaults.baseURL = (this.env === 'live') ? 'https://api.opennode.com/v2' : 'https://dev-api.opennode.com/v2';
+    this.instance_v2.defaults.timeout = 15000;
+    this.instance_v2.defaults.headers = { 'Authorization': this.api_key, 'user_agent': version };
   }
 
   async createCharge(charge) {
@@ -113,12 +117,7 @@ class OpenNodeClient {
 
   async initiateWithdrawalAsync(withdrawal) {
     try {
-      let new_instance = axios.create();
-      new_instance.defaults.baseURL = (this.env === 'live') ? 'https://api.opennode.com/v2' : 'https://dev-api.opennode.com/v2';
-      new_instance.defaults.timeout = 15000;
-      new_instance.defaults.headers = { 'Authorization': this.api_key, 'user_agent': version };
-
-      const response = await new_instance.post('/withdrawals', withdrawal);
+      const response = await this.instance_v2.post('/withdrawals', withdrawal);
       return response.data.data;
     }
     catch (error) {
@@ -163,7 +162,7 @@ class OpenNodeClient {
 
   async initiatePayout(payout) {
     try {
-      const response = await this.instance.post(`/payouts`, payout);
+      const response = await this.instance_v2.post('/payouts', payout);
       return response.data.data;
     }
     catch (error) {
@@ -173,7 +172,7 @@ class OpenNodeClient {
 
   async payoutInfo(id) {
     try {
-      const response = await this.instance.get(`/payout/${id}`);
+      const response = await this.instance_v2.get(`/payout/${id}`);
       return response.data.data;
     }
     catch (error) {
@@ -183,11 +182,7 @@ class OpenNodeClient {
 
   async createLnUrlWithdrawal(withdrawal) {
     try {
-      let new_instance = axios.create();
-      new_instance.defaults.baseURL = (this.env === 'live') ? 'https://api.opennode.com/v2' : 'https://dev-api.opennode.com/v2';
-      new_instance.defaults.timeout = 15000;
-      new_instance.defaults.headers = { 'Authorization': this.api_key, 'user_agent': version };
-      const response = await new_instance.post(`/lnurl-withdrawal`, withdrawal);
+      const response = await this.instance_v2.post(`/lnurl-withdrawal`, withdrawal);
       return response.data.data;
     }
     catch (error) {
