@@ -82,3 +82,17 @@ function handleWebhook (req, res) {
   return res.sendStatus(200);
 }
 ```
+
+## Typescript usage
+
+You can also use this library in a typescript project by importing the `OpenNodeClass` which allows you to create multiple instances.
+
+```ts
+import OpenNodeClient from "opennode/submodules/client";
+
+const opennode: OpenNodeClient = new OpenNodeClient("API_KEY", "dev");
+
+opennode.createCharge({ amount: 1.1 })
+  .then(console.log)
+  .catch((error) => console.error(`${error.status} | ${error.message}`));
+```
