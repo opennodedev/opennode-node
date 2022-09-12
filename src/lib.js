@@ -24,6 +24,10 @@ async function initiateWithdrawal(withdrawal) {
   return await instance.initiateWithdrawal(withdrawal);
 }
 
+async function initiateExchange(exchange) {
+  return await instance.initiateExchange(exchange);
+}
+
 async function withdrawalInfo(id) {
   return await instance.withdrawalInfo(id);
 }
@@ -82,6 +86,7 @@ module.exports = {
   chargeInfo: chargeInfo,
   listCharges: listCharges,
   initiateWithdrawal: initiateWithdrawal,
+  initiateExchange: initiateExchange,
   initiateWithdrawalAsync: initiateWithdrawalAsync,
   withdrawalInfo: withdrawalInfo,
   listWithdrawals: listWithdrawals,
