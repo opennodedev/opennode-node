@@ -1,4 +1,4 @@
-const opennode = require('opennode');
+import * as opennode from '../src/lib';
 
 /**
  * Setup your API Key and environment
