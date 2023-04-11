@@ -42,6 +42,24 @@ export interface OpenNodeChargeRequest {
    * Max(Default): `1440` (24H)
    */
   ttl?: number;
+
+  metadata?: Record<string, any>;
+
+  /**
+   * Basis points to auto convert checkout to `BTC`
+   *
+   * Max: `10000` (100%)
+   */
+  split_to_btc_bps?: number;
+
+  /** Whether OpenNode should send an email to {@link notif_email} */
+  notify_receiver?: boolean;
+
+  /** Whether OpenNode should require KYC check of the payer */
+  kyc_required?: boolean;
+
+  /** Whether description should only be shown as a sha256 hash */
+  desc_hash?: string;
 }
 
 export type OpenNodeChargeWebhook = { hashed_order: string } & OpenNodeCharge;

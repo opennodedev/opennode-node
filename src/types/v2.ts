@@ -1,10 +1,12 @@
 export interface OpenNodePayoutTransferRequest {
-  /** Use type=email for internal transfers, type=managed to transfers to managed accounts */
-  type: "email" | "managed";
-  /** Recipient's OpenNode ID or managed account ID */
+  /** Use `id` for internal transfers. `managed` to transfers to managed accounts */
+  type: "id" | "managed";
+  /** Recipient's OpenNode ID (see Business profile page on dashboard) or managed account ID */
   address: string;
-  /** Amount in source wallet's currency - i.e. if wallet=USD, amount is in USD */
+  /** Amount (denominated by {@link currency}) */
   amount: string;
+  /** Currency of that transfer (if not set defaults to the same currenct as the payout source wallet) */
+  currency?: string;
 }
 
 export interface OpenNodePayoutRequest {
@@ -15,6 +17,8 @@ export interface OpenNodePayoutRequest {
 
   /** URL to receive webhooks for payout status updates */
   webhook_url?: string;
+
+  external_funding?: boolean;
 }
 
 export interface OpenNodePayout {
@@ -22,8 +26,14 @@ export interface OpenNodePayout {
   amount: number;
   status: string;
   currency: string;
-  processed_at: string;
-  created_at: string;
+  processed_at: number;
+  created_at: number;
+  fee: number;
+  source_amount: number;
+  source_fee: number;
+  source_wallet: string;
+  transfers: { id: string }[];
+  external_funding: boolean;
 }
 
 export interface OpenNodeExchangeFiatRequest {
@@ -40,9 +50,13 @@ export interface OpenNodeExchangeBTCRequest {
   btc_amount: number;
 }
 
-export type OpenNodeExchangeRequest =
+export type OpenNodeExchangeRequest = (
   | OpenNodeExchangeFiatRequest
-  | OpenNodeExchangeBTCRequest;
+  | OpenNodeExchangeBTCRequest
+) & {
+  /** Defaults to `true` */
+  auto_confirm?: boolean;
+};
 
 export interface OpenNodeExchange {
   success: boolean;
@@ -50,42 +64,87 @@ export interface OpenNodeExchange {
   btc_amount: number;
   fiat_amount: number;
   fiat_currency: string;
+  expires_at: number;
 }
 
-export type OpenNodeWithdrawalRequest = OpenNodeWithdrawalOnchainRequest;
+export type OpenNodeWithdrawalRequest =
+  | OpenNodeWithdrawalOnchainRequest
+  | OpenNodeWithdrawalLnRequest
+  | OpenNodeWithdrawalWireRequest;
 
 export interface OpenNodeWithdrawalOnchainRequest {
   /**
-   * Determines type of the withdrawal.
-   *
-   * Options: `chain` (on-chain), `ln` (Lightning Network), `wire` (bank transfer)
+   * Type `chain` (on-chain)
    */
-  type: "chain" | "ln" | "wire";
+  type: "chain";
 
   /**
-   * Amount intended to be withdrawn from the account.
-   *
-   * Required for type `chain` and `wire`.
-   *
-   * Amount in satoshis when type `chain` and `ln`.
-   * Amount in user's fiat currency when type `wire`.
+   * Amount intended to be withdrawn from the account (denominated by {@link currency}).
    */
   amount: number;
 
+  /** Defaults to `BTC` */
+  currency?: string;
+
   /**
-   * Address that funds will be withdrawn to.
-   *
-   * Required for type `chain` and `ln` withdrawals.
-   *
-   * Type `chain`: On-chain address. \
-   * Type `ln`: Lightning Payment request.
+   * On-chain address that funds will be withdrawn to.
    */
   address: string;
 
   /**
    * URL to receive webhooks for withdrawal status updates
    */
-  callback_url: string;
+  callback_url?: string;
+
+  /** Source of funds to perform withdrawal. If `fiat` will convert the necessary amount and withdrawal */
+  wallet?: "fiat" | "btc";
+
+  /** Defaults to `true` */
+  auto_confirm?: boolean;
+
+  custom_id?: string;
+}
+
+export interface OpenNodeWithdrawalLnRequest {
+  /**
+   * Type `ln` (Lightning Network)
+   */
+  type: "ln";
+
+  /**
+   * Lightning Payment request.
+   */
+  payreq: string;
+
+  /**
+   * Amount intended to be withdrawn from the account (denominated in `sats` - only needed when payreq doesn't have amount).
+   */
+  amount?: number;
+
+  /**
+   * URL to receive webhooks for withdrawal status updates
+   */
+  callback_url?: string;
+
+  /** Source of funds to perform withdrawal. If `fiat` will convert the necessary amount and withdrawal */
+  wallet?: "fiat" | "btc";
+
+  /** Defaults to `true` */
+  auto_confirm?: boolean;
+
+  custom_id?: string;
+}
+
+export interface OpenNodeWithdrawalWireRequest {
+  /**
+   * Type `wire` (bank transfer)
+   */
+  type: "wire";
+
+  /**
+   * Amount in user's fiat currency.
+   */
+  amount: number;
 }
 
 export interface OpenNodeWithdrawal {
@@ -94,18 +153,25 @@ export interface OpenNodeWithdrawal {
   type: string;
   amount: number;
   fee: number;
-  fiat_value: string;
+  fiat_value: number;
   custom_id: string;
   callback_url: string;
   processed_at: number;
-  status: string;
+  conversion?: {
+    from: string;
+    from_amount: number;
+    to: string;
+    to_amount: number;
+  };
+  expiry?: number;
+  status: "completed" | "initial" | "pending" | "failed";
 }
 
 export interface OpenNodeLnURLWithdrawalRequest {
   min_amt: number;
   max_amt: number;
+  description: string;
   callback_url?: string;
   external_id?: string;
-  expiry_date?: string;
-  description?: string;
+  expiry_date?: number;
 }
