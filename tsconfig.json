@@ -6,6 +6,7 @@
     "strictNullChecks": true,
     "strictFunctionTypes": true,
     "outDir": "dist",
+    "rootDir": "src",
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
@@ -15,11 +16,10 @@
     "noImplicitAny": true,
     "allowJs": false,
     "alwaysStrict": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
   },
   "files": [
     "src/lib.ts",
-    "./src/OpenNodeError.ts"
   ],
   "include": [
     "src/"

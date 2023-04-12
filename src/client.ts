@@ -1,7 +1,6 @@
 import axios, { AxiosInstance, AxiosResponseHeaders } from "axios";
 import { createHmac } from "node:crypto";
 import { deprecate } from "node:util";
-import { version } from "../package.json";
 import { OpenNodeError } from "./OpenNodeError";
 import {
   OpenNodeBalance,
@@ -16,6 +15,7 @@ import {
 } from "./types/v1";
 import * as v2 from "./types/v2";
 
+const version = require("../package.json")?.version || "local";
 const packageVersion = `npm-opennode-v${version}`;
 
 export type OpenNodeEnv = "live" | "dev";
@@ -45,27 +45,26 @@ export class OpenNodeClient {
           "Keep-Alive": "timeout=10",
           "User-Agent": packageVersion,
         },
-        transformResponse: (
-          { data }: any,
-          headers?: AxiosResponseHeaders
-        ): any => {
-          console.debug("Data,headers", data, headers);
-          return data.data;
-        },
       });
 
-      client.interceptors.response.use(undefined, (err) => {
-        if (axios.isAxiosError(err)) {
-          // added to keep compatibility with previous versions
-          return new OpenNodeError(
-            err.message,
-            err.response?.statusText,
-            err.response?.status
-          );
+      client.interceptors.response.use(
+        // normalize responses
+        ({ data }) => ("data" in data ? data.data : data),
+        (err) => {
+          if (axios.isAxiosError(err)) {
+            // added to keep compatibility with previous versions
+            throw new OpenNodeError(
+              err.message,
+              err.response?.statusText,
+              err.response?.status
+            );
+          }
+
+          if (err instanceof Error) throw err;
+
+          return err;
         }
-
-        return err;
-      });
+      );
 
       return client;
     };
