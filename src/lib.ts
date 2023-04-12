@@ -8,15 +8,20 @@ import {
   OpenNodeRefund,
   OpenNodeRefundRequest,
   OpenNodeWithdrawal,
-  OpenNodeWithdrawalRequest
+  OpenNodeWithdrawalRequest,
 } from "./types/v1";
 import * as v2 from "./types/v2";
 import {
   OpenNodeExchangeRequest,
   OpenNodeLnURLWithdrawalRequest,
   OpenNodePayoutRequest,
-  OpenNodeWithdrawalOnchainRequest
+  OpenNodeWithdrawalOnchainRequest,
 } from "./types/v2";
+
+export { OpenNodeClient, OpenNodeEnv } from "./client";
+export { OpenNodeError } from "./OpenNodeError";
+export * as v1 from "./types/v1";
+export * as v2 from "./types/v2";
 
 let instance!: OpenNodeClient;
 

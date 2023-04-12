@@ -36,24 +36,15 @@ export interface OpenNodePayout {
   external_funding: boolean;
 }
 
-export interface OpenNodeExchangeFiatRequest {
-  to: "fiat";
+export type OpenNodeExchangeRequest = {
+  to: "btc" | "fiat";
 
   /** Amount intended to be exchanged in merchant's local currency. */
-  fiat_amount: number;
-}
-
-export interface OpenNodeExchangeBTCRequest {
-  to: "btc";
+  fiat_amount?: number;
 
   /** Amount intended to be exchanged in satoshis. */
-  btc_amount: number;
-}
+  btc_amount?: number;
 
-export type OpenNodeExchangeRequest = (
-  | OpenNodeExchangeFiatRequest
-  | OpenNodeExchangeBTCRequest
-) & {
   /** Defaults to `true` */
   auto_confirm?: boolean;
 };

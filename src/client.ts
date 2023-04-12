@@ -31,10 +31,7 @@ export class OpenNodeClient {
     this.api_key = key;
     this.env = environment;
 
-    this.instanceV1 = createInstance("v1");
-    this.instanceV2 = createInstance("v2");
-
-    function createInstance(version: string): AxiosInstance {
+    const createInstance = (version: string): AxiosInstance => {
       const client = axios.create({
         baseURL:
           environment === "live"
@@ -71,7 +68,10 @@ export class OpenNodeClient {
       });
 
       return client;
-    }
+    };
+
+    this.instanceV1 = createInstance("v1");
+    this.instanceV2 = createInstance("v2");
   }
 
   async createCharge(charge: OpenNodeChargeRequest): Promise<OpenNodeCharge> {
