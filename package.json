@@ -26,7 +26,7 @@
     "api",
     "opennode"
   ],
-  "main": "dist/lib.js",
+  "main": "dist/index.js",
   "version": "1.5.0",
   "dependencies": {
     "axios": "^1.3.4"
@@ -39,7 +39,7 @@
   },
   "scripts": {
     "test": "mocha",
-    "build": "tsc",
-    "prepack": "tsc"
+    "build": "rm -rf dist/ && tsc",
+    "prepack": "rm -rf dist/ && tsc"
   }
 }

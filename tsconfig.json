@@ -19,7 +19,7 @@
     "resolveJsonModule": true,
   },
   "files": [
-    "src/lib.ts",
+    "src/index.ts",
   ],
   "include": [
     "src/"

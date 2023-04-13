@@ -1,10 +1,9 @@
-import * as opennode from '../src/lib';
+import * as opennode from "../src";
 
 /**
  * Setup your API Key and environment
  */
-opennode.setCredentials('MY_API_KEY', 'dev');
-
+opennode.setCredentials("MY_API_KEY", "dev");
 
 /**
  *
@@ -15,52 +14,52 @@ opennode.setCredentials('MY_API_KEY', 'dev');
  * Using promises
  */
 
-opennode.chargeInfo('47bb5224-bf50-49d0-a317-4adfd345221a')
-  .then(charge => {
+opennode
+  .chargeInfo("47bb5224-bf50-49d0-a317-4adfd345221a")
+  .then((charge) => {
     console.log(charge);
   })
-  .catch(error => {
+  .catch((error) => {
     console.error(`${error.status} | ${error.message}`);
-  })
+  });
 
 /**
  *
  * Using async/await
  */
-
-;(async () => {
-
+(async () => {
   try {
-    const data = await opennode.chargeInfo('47bb5224-bf50-49d0-a317-4adfd345221a');
+    const data = await opennode.chargeInfo(
+      "47bb5224-bf50-49d0-a317-4adfd345221a"
+    );
     console.log(data);
-  }
-  catch (error) {
+  } catch (error) {
     console.error(`${error.status} | ${error.message}`);
   }
-})()
+})();
 
 /**
  *
  * Creating a charge
  */
 
-
 const charge = {
   amount: 10.5,
   currency: "USD",
   callback_url: "https://example.com/webhook/opennode",
-  auto_settle: false
+  auto_settle: false,
 };
 
 /**
  * Using promises
  */
 
-opennode.createCharge(charge)
-  .then(response => {
+opennode
+  .createCharge(charge)
+  .then((response) => {
     console.log(response);
   })
-  .catch(error => {
+  .catch((error) => {
     console.error(`${error.status} | ${error.message}`);
   });
 
@@ -68,12 +67,11 @@ opennode.createCharge(charge)
  * Using async/await
  */
 
-;(async () => {
+(async () => {
   try {
     const response = await opennode.createCharge(charge);
     console.log(response);
-  }
-  catch(error) {
+  } catch (error) {
     console.error(`${error.status} | ${error.message}`);
   }
 })();
@@ -87,7 +85,7 @@ opennode.createCharge(charge)
  * Using promises
  */
 
- const withdrawal = {
+const withdrawal = {
   min_amt: 5000,
   max_amt: 5000,
   description: "Claim these 5000 sats",
@@ -95,12 +93,12 @@ opennode.createCharge(charge)
   callback_url: "https://example.com/webhook/opennode",
 };
 
-
-opennode.createLnUrlWithdrawal(withdrawal)
-  .then(response => {
+opennode
+  .createLnUrlWithdrawal(withdrawal)
+  .then((response) => {
     console.log(response);
   })
-  .catch(error => {
+  .catch((error) => {
     console.error(`${error.status} | ${error.message}`);
   });
 
@@ -108,17 +106,11 @@ opennode.createLnUrlWithdrawal(withdrawal)
  * Using async/await
  */
 
-;(async () => {
+(async () => {
   try {
     const response = await opennode.createLnUrlWithdrawal(withdrawal);
     console.log(response);
-  }
-  catch(error) {
+  } catch (error) {
     console.error(`${error.status} | ${error.message}`);
   }
 })();
-
-
-
-
-

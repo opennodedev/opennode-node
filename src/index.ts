@@ -93,7 +93,7 @@ export function initiateWithdrawalAsync(
   return instance.initiateWithdrawalAsync(withdrawal);
 }
 
-export function verifySignature(charge: OpenNodeChargeWebhook): boolean {
+export function signatureIsValid(charge: OpenNodeChargeWebhook): boolean {
   return instance.verifySignature(charge);
 }
 
