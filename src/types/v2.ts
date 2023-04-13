@@ -155,7 +155,7 @@ export interface OpenNodeWithdrawal {
     to_amount: number;
   };
   expiry?: number;
-  status: "completed" | "initial" | "pending" | "failed";
+  status: string;
 }
 
 export interface OpenNodeLnURLWithdrawalRequest {
