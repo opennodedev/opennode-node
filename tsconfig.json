@@ -17,6 +17,7 @@
     "allowJs": false,
     "alwaysStrict": true,
     "resolveJsonModule": true,
+    "esModuleInterop": true
   },
   "files": [
     "src/index.ts",

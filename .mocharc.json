@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json.schemastore.org/mocharc",
+  "timeout": 5000,
+  "slow": 350,
+  "bail": true,
+  "reporter": "progress",
+  "watch-files": [
+    "dist/**/*.js",
+    "test/**/*.js"
+  ]
+}

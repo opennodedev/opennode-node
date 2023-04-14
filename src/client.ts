@@ -1,7 +1,8 @@
-import axios, { AxiosInstance, AxiosResponseHeaders } from "axios";
+import axios, { AxiosInstance } from "axios";
 import { createHmac } from "node:crypto";
 import { deprecate } from "node:util";
 import { OpenNodeError } from "./OpenNodeError";
+import { OpenNodeEnv } from "./types";
 import {
   OpenNodeBalance,
   OpenNodeCharge,
@@ -17,8 +18,6 @@ import * as v2 from "./types/v2";
 
 const version = require("../package.json")?.version || "local";
 const packageVersion = `npm-opennode-v${version}`;
-
-export type OpenNodeEnv = "live" | "dev";
 
 export class OpenNodeClient {
   public env: OpenNodeEnv;
@@ -107,6 +106,11 @@ export class OpenNodeClient {
 
   async listCurrencies(): Promise<string[]> {
     return this.instanceV1.get(`/currencies`);
+  }
+
+  /** @deprecated Use {@link accountBalance} */
+  async getBalance() {
+    return this.accountBalance();
   }
 
   /** @deprecated Use {@link accountBalance} */

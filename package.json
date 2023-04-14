@@ -38,8 +38,8 @@
     "typescript": "^4.9.5"
   },
   "scripts": {
-    "test": "mocha",
+    "test": "pnpm build && mocha",
     "build": "rm -rf dist/ && tsc",
-    "prepack": "rm -rf dist/ && tsc"
+    "prepack": "pnpm build"
   }
 }
