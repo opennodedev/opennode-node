@@ -33,8 +33,12 @@ jspm_packages
 # Editors
 .idea
 
-# Lib
-lib
-
 others
 .DS_Store
+
+# build dir
+dist
+
+# other lockfiles
+yarn.lock
+package-lock.json

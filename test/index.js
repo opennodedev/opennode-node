@@ -1,10 +1,10 @@
 const { assert, expect } = require('chai');
-const opennode = require('../src/lib');
-const client = require('../submodules/client');
+const opennode = require('../dist');
+
 opennode.setCredentials('1f758b02-3405-45cf-8d71-f4462282a7ca', 'dev');
 
-describe('charge', function() {
-  describe('charge info', function() {
+describe('charge', function () {
+  describe('charge info', function () {
     it('should return a charge object', async () => {
 
       let charge, err
@@ -22,7 +22,7 @@ describe('charge', function() {
     });
   });
 
-  describe('create charge', function() {
+  describe('create charge', function () {
     it('should return a charge object', async () => {
 
       let charge, err
@@ -44,7 +44,7 @@ describe('charge', function() {
     });
   });
 
-  describe('create charge with invalid parameters', function() {
+  describe('create charge with invalid parameters', function () {
     it('should return a (400) Bad Request', async () => {
 
       let charge, err
@@ -63,8 +63,8 @@ describe('charge', function() {
   });
 });
 
-describe('utils', function() {
-  describe('list currencies', function() {
+describe('utils', function () {
+  describe('list currencies', function () {
     it('should return an object with supported currencies', async () => {
 
       let currencies, err;
@@ -81,7 +81,7 @@ describe('utils', function() {
     });
   });
 
-  describe('list rates', function() {
+  describe('list rates', function () {
     it('should return an object with live rates', async () => {
 
       let rates, err;
@@ -99,8 +99,8 @@ describe('utils', function() {
   });
 });
 
-describe('withdrawals', function() {
-  describe('get withdrawal info', function() {
+describe('withdrawals', function () {
+  describe('get withdrawal info', function () {
     it('should return a withdrawal object', async () => {
 
       let rates, err;
@@ -117,8 +117,8 @@ describe('withdrawals', function() {
     });
   });
 
-  describe('create a withdrawal with wrong permissions', function() {
-    it('should return a (401) Unauthorized', async () => {
+  describe('create a withdrawal with wrong permissions', function () {
+    it('should return a (403) Unauthorized', async () => {
 
       let withdrawal, err;
 
@@ -131,14 +131,14 @@ describe('withdrawals', function() {
         err = error;
       }
       finally {
-        assert.deepEqual(err.status, 401);
+        assert.equal(err.status, 403);
       }
     });
   });
 });
 
-describe('webhook', function() {
-  describe('verify webhook signature', function() {
+describe('webhook', function () {
+  describe('verify webhook signature', function () {
     it('signatures should match', async () => {
 
       let result, err;
@@ -160,8 +160,8 @@ describe('webhook', function() {
   });
 });
 
-describe('account', function() {
-  describe('get user balance', function() {
+describe('account', function () {
+  describe('get user balance', function () {
     it('should return a balance object', async () => {
 
       let balance, err;
@@ -179,8 +179,8 @@ describe('account', function() {
   });
 });
 
-describe('refunds', function() {
-  describe('refund charge', function() {
+describe('refunds', function () {
+  describe('refund charge', function () {
     it('should return a refund object', async () => {
 
       let refund, err;
@@ -200,7 +200,7 @@ describe('refunds', function() {
     });
   });
 
-  describe('refund info', function() {
+  describe('refund info', function () {
     it('should return a refund object', async () => {
 
       let refund, err;
@@ -217,7 +217,7 @@ describe('refunds', function() {
     });
   });
 
-  describe('list refunds', function() {
+  describe('list refunds', function () {
     it('should return a list of refunds', async () => {
 
       let refunds, err;
@@ -239,9 +239,9 @@ describe('client', function () {
   it('should allow multiple clients with different credentials', async () => {
 
     let charge1, charge2, err
-    const client1 = new client('1f758b02-3405-45cf-8d71-f4462282a7ca', 'dev');
+    const client1 = new opennode.OpenNodeClient('1f758b02-3405-45cf-8d71-f4462282a7ca', 'dev');
     const charge1Id = '47bb5224-bf50-49d0-a317-4adfd345221a';
-    const client2 = new client('195d82c3-96de-43a3-9de2-13fc7fca7c7c', 'dev');
+    const client2 = new opennode.OpenNodeClient('195d82c3-96de-43a3-9de2-13fc7fca7c7c', 'dev');
     const charge2Id = 'd09fc8f0-8d51-4292-adeb-f8dd951fb7e6';
 
     try {
