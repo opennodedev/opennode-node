@@ -17,12 +17,13 @@ yarn.lock
 test
 examples
 CHANGELOG.md
-.travis.yml
+.babelrc
+.DS_Store
+.editorconf
 .editorconfig
 .eslintignore
 .eslintrc
-.babelrc
 .gitignore
-.editorconf
-.DS_Store
+.mocharc.json
+.travis.yml
 tsconfig.json
