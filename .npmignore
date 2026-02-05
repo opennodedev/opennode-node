@@ -1,5 +1,7 @@
 *.log
 npm-debug.log*
+.pnpm-store
+test-local.ts
 
 # Coverage directory used by tools like istanbul
 coverage
@@ -16,7 +18,6 @@ yarn.lock
 # project files
 test
 examples
-CHANGELOG.md
 .babelrc
 .DS_Store
 .editorconf
