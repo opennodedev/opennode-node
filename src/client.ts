@@ -76,8 +76,8 @@ export class OpenNodeClient {
     return this.instanceV1.post(`/charges`, charge);
   }
 
-  async chargeInfo(id: string): Promise<OpenNodeCharge> {
-    return this.instanceV1.get(`/charge/${id}`);
+  async chargeInfo(id: string): Promise<v2.OpenNodeChargeV2> {
+    return this.instanceV2.get(`/charges/${id}`);
   }
 
   async listCharges(): Promise<OpenNodeCharge[]> {

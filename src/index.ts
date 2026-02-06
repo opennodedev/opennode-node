@@ -29,7 +29,7 @@ export function createCharge(
   return instance.createCharge(charge);
 }
 
-export function chargeInfo(id: string): Promise<v1.OpenNodeCharge> {
+export function chargeInfo(id: string): Promise<v2.OpenNodeChargeV2> {
   return instance.chargeInfo(id);
 }
 
