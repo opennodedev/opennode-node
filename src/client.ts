@@ -73,10 +73,23 @@ export class OpenNodeClient {
   }
 
   async createCharge(charge: OpenNodeChargeRequest): Promise<OpenNodeCharge> {
-    return this.instanceV1.post(`/charges`, charge);
+    const response: any = await this.instanceV1.post(`/charges`, charge);
+
+    // Remove V1-specific fields and transform to consistent format
+    const { amount, lightning_invoice, created_at, ...rest } = response;
+
+    return {
+      ...rest,
+      price: amount,
+      created_at: new Date(created_at * 1000).toISOString(),
+      lightning: lightning_invoice ? {
+        payreq: lightning_invoice.payreq,
+        expires_at: new Date(lightning_invoice.expires_at * 1000).toISOString(),
+      } : null,
+    };
   }
 
-  async chargeInfo(id: string): Promise<v2.OpenNodeChargeV2> {
+  async chargeInfo(id: string): Promise<OpenNodeCharge> {
     return this.instanceV2.get(`/charges/${id}`);
   }
 

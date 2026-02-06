@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.1] - 2026-02-06
+
+### Fixed
+
+- `createCharge()` now returns consistent V2 response format matching `chargeInfo()`
+  - `amount` → `price`
+  - `lightning_invoice` → `lightning`
+  - Timestamps now ISO 8601 format
+- `chargeInfo()` now returns all fields from V1 (`callback_url`, `success_url`, `notif_email`, `uri`)
+- Consolidated `OpenNodeCharge` type - removed separate `OpenNodeChargeV2`
+
+### Changed
+
+- `chargeInfo()` is now a superset of `createCharge()` (contains all fields plus extras like `fee`, `net_fiat_value`, etc.)
+
 ## [2.0.0] - 2026-02-05
 
 ### ⚠️ BREAKING CHANGES
