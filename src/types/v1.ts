@@ -64,23 +64,70 @@ export interface OpenNodeChargeRequest {
 
 export type OpenNodeChargeWebhook = { hashed_order: string } & OpenNodeCharge;
 
+export interface OpenNodeLightningInvoice {
+  id?: string;
+  status?: string;
+  price?: number;
+  payreq: string;
+  created_at?: string;
+  expires_at: string;
+  settled_at?: string | null;
+  checkout_id?: string;
+}
+
 export interface OpenNodeCharge {
+  /** Unique charge identifier */
   id: string;
+  /** Charge description provided at creation */
   description: string;
-  amount: number;
-  missing_amt: number;
+  /** Amount in satoshis */
+  price: number;
+  /** Charge status: unpaid, paid, processing, underpaid, refunded, expired, failed */
   status: string;
-  fiat_value: number;
-  source_fiat_value: number;
-  currency: string;
-  created_at: number;
-  order_id: string;
-  address: string;
-  metadata?: OpenNodeChargeMetadata;
+  /** ISO timestamp when charge was created */
+  created_at: string;
+  /** ISO timestamp when charge expires */
   expires_at?: string;
+  /** OpenNode fee in satoshis */
+  fee?: number;
+  /** Value in merchant's account currency */
+  fiat_value: number;
+  /** Original charge amount in the currency specified at creation */
+  source_fiat_value: number;
+  /** Currency code specified when creating the charge */
+  currency: string;
+  /** Whether the charge is configured to auto-settle to fiat */
   auto_settle?: boolean;
-  chain_invoice?: OpenNodeOnchainInvoice;
-  transactions?: OpenNodeChargeTransaction[];
+  /** Optional notes attached to the charge */
+  notes?: string | null;
+  /** Merchant's order ID if provided */
+  order_id?: string | null;
+  /** On-chain payment details */
+  onchain?: unknown[];
+  /** Lightning invoice details */
+  lightning?: OpenNodeLightningInvoice | null;
+  /** Custom metadata provided at charge creation */
+  metadata?: Record<string, unknown>;
+  /** Bitcoin address for on-chain payments */
+  address: string;
+  /** Whether the charge was exchanged to fiat */
+  exchanged?: boolean;
+  /** Net fiat value after fees */
+  net_fiat_value?: number;
+  /** Remaining amount in satoshis (for underpaid charges) */
+  missing_amt?: number;
+  /** ISO timestamp when charge was settled */
+  settled_at?: string | null;
+  /** Payment method used: lightning, onchain, or null if unpaid */
+  payment_method?: string | null;
+  /** Time-to-live in minutes */
+  ttl?: number;
+  /** Whether description hash was used */
+  desc_hash?: boolean;
+  /** URL to the hosted checkout page */
+  hosted_checkout_url?: string;
+  /** Customer site ID if applicable */
+  customer_site_id?: string | null;
 }
 
 export interface OpenNodeOnchainInvoice {
